@@ -20,7 +20,7 @@ Reuse a Project already linked to the repo, preferring one titled `<owner>/<repo
 exists, create one with that title and the short description `Backlog for <owner>/<repo>`, private
 unless the user asks otherwise, and link it. Leave the Status field as GitHub created it.
 
-The default label vocabulary is in [Backlog.md](./Backlog.md), which is also the template for the
+The default label vocabulary is in [backlog.md](./backlog.md), which is also the template for the
 repo's file. The user can keep the defaults or map any of them to labels the repo already uses.
 Create only the labels that are missing, with a consistent color per group, and leave existing
 labels, Projects and their settings alone.
