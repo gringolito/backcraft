@@ -8,13 +8,11 @@ A good item answers four questions before anyone opens an editor. What are we bu
 
 ## How it works
 
-Everything lives in GitHub. Each item is an issue on a Project board with one label each for type, priority and effort. There's no second database to drift out of sync.
+Everything lives in GitHub. Each item is an issue on a Project board, and buildable work carries one label each for type, priority and effort. There's no second database to drift out of sync.
 
 An item has to pass [INVEST](https://en.wikipedia.org/wiki/INVEST_(mnemonic)) before anyone can pick it up. I treat that as the minimum for saying anyone understands it. When an item falls short or has open questions, it gets `needs-clarification`, and `/pick-item` passes over it until `/refine-item` sorts it out. Half-formed ideas are fine too. `/add-idea` parks one at the bottom of the queue so you don't lose it.
 
 Priority and order are separate on purpose. Priority is how much something hurts. Rank, the item's position in the Project, is what you do next. When `/add-item` suggests a position that disagrees with the priority, it tells you why, and nothing moves without your say-so. If the order changed, you changed it.
-
-Blockers are GitHub dependencies, so `/pick-item` never hands you something you can't start.
 
 The agent checks the structure. You make the calls.
 
@@ -22,32 +20,30 @@ The agent checks the structure. You make the calls.
 
 You'll need:
 
-- an agent harness that loads `SKILL.md` skills, such as [Claude Code](https://claude.ai/code)
+- an agent harness that loads `SKILL.md` skills, such as [Claude Code](https://claude.ai/code), [Codex](https://github.com/openai/codex), [pi](https://github.com/earendil-works/pi) or [oh-my-pi](https://github.com/can1357/oh-my-pi)
 - the [GitHub CLI](https://cli.github.com/) (`gh`), signed in
-- a GitHub repo with Issues turned on and an `origin` remote pointing at it
+- a GitHub repo with Issues turned on
 
-Your `gh` token needs the `repo`, `project` and `read:user` scopes, plus `read:org` for organization repos. `gh auth refresh --scopes repo,project,read:user,read:org` adds whatever is missing. If you use a personal access token, create a new one with those scopes.
+### Install
 
-### Claude Code
+```bash
+npx skills@latest add gringolito/backcraft
+```
+
+### Claude Code plugin
+
+If you'd rather use Claude Code's plugin marketplace:
 
 ```text
 /plugin marketplace add gringolito/backcraft
 /plugin install backcraft@gringolito
 ```
 
-Restart Claude Code if it was already open. Getting an SSH error? See [Troubleshooting](#troubleshooting).
-
-### Other harnesses
-
-```bash
-npx skills@latest add gringolito/backcraft
-```
-
-The [skills CLI](https://github.com/vercel-labs/skills) asks which agents to install for. You can also copy or symlink the folders in `skills/` into your harness's skills directory.
+Restart Claude Code if it was already open.
 
 ### First run
 
-Run `/setup` once in each repo. It links a Project, creates the labels and writes both to `docs/agents/backlog.md`, which the other skills read. Edit that file when you want different labels. Running `/setup` again is safe.
+Run `/setup` once in the repo you want to use Backcraft with. It links a Project, creates the labels and writes both to `docs/agents/backlog.md`, which the other skills read. Edit that file when you want different labels. Running `/setup` again is safe.
 
 ### Upgrading from github-backlog-management
 
@@ -76,20 +72,6 @@ Backcraft used to be called `github-backlog-management`. Remove the old plugin a
 | `/close-release` | Closes a Milestone and publishes its release. |
 | `/health` | Shows the shape of the whole backlog: distribution, age, overdue priorities, stale work. |
 | `/audit` | Finds conflicting labels, malformed items, broken dependencies and milestone mix-ups, with a fix for each. |
-
-## Troubleshooting
-
-### Plugin install fails with an SSH error
-
-You see `git@github.com: Permission denied (publickey).` or `Host key verification failed.` while installing.
-
-Claude Code clones marketplace plugins over SSH, even public ones ([anthropics/claude-code#26588](https://github.com/anthropics/claude-code/issues/26588)). The quickest fix is to point Git at HTTPS:
-
-```bash
-git config --global url."https://github.com/".insteadOf git@github.com:
-```
-
-Or set up SSH for GitHub. Trust its host key with `ssh-keyscan -t ed25519 github.com >> ~/.ssh/known_hosts`, then add your key to your GitHub account and to `ssh-agent`.
 
 ## Contributing
 
