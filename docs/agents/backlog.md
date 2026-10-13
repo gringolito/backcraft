@@ -4,7 +4,7 @@ The backlog skills read this file for the repo's Project and label vocabulary. E
 
 ## Project
 
-gringolito/github-backlog-management-skill Backlog: https://github.com/users/gringolito/projects/2 (project number 2)
+gringolito/backcraft Backlog: https://github.com/users/gringolito/projects/2 (project number 2)
 
 ## Labels
 

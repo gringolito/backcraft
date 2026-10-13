@@ -1,17 +1,24 @@
-# GitHub Backlog Management
+# Backcraft
 
-> A Claude Code plugin that turns GitHub Issues and Projects v2 into a disciplined, AI-assisted backlog. No extra tools, no databases, no webhooks.
+> A Claude Code plugin for writing a backlog you can build from, in GitHub Issues and Projects. No extra tools, no databases, no webhooks.
 
-## Motivation
+## Why
 
-Backlogs rot. Items accumulate without acceptance criteria, blockers go unrecorded, priorities drift from execution order, and eventually the backlog stops reflecting reality, so people stop trusting it.
+Every developer learns to write code. Few learn to write a backlog item, and it shows. "Add payment retry logic" sits in the queue for a month, then someone picks it up and spends a week building on guesses.
 
-This skill keeps a GitHub backlog honest. Every item is INVEST-validated before it lands in the queue. Blockers are tracked with GitHub's native dependency API, not buried in comments. `/pick-item` picks the topmost unblocked work automatically, so "what do I do next?" has a deterministic answer.
+Writing backlog items is a craft, and Backcraft is a set of skills for practicing it. A good item says what you're building, why it matters, who it's for and what done looks like, before anyone opens an editor. Think of a sketch next to a blueprint. Hand a blueprint to a teammate or an agent and you get back what you meant.
 
-Claude enforces structure; it doesn't set your priorities. It flags vague items, surfaces dependency candidates for you to confirm, and picks the next item, but you decide what to do with it.
+Backcraft works in GitHub, where your code and issues already are. Every item has to pass [INVEST](https://en.wikipedia.org/wiki/INVEST_(mnemonic)) before it enters the queue, because that is the lowest bar for saying anyone understands it. An item that fails gets `needs-clarification`, and `/pick-item` skips it until `/refine-item` brings it up to standard. Blockers are GitHub dependencies, so blocked work never gets picked.
+
+Order is a decision too. Priority says how much an item matters. Rank, the order in the Project, says what comes next. `/add-item` proposes a Rank and gives its reason when that disagrees with the priority. Nothing gets re-ranked without your OK, so when the order changes, someone chose it.
+
+Claude enforces the structure and you set the priorities. It flags vague items, suggests dependencies for you to confirm and picks the next item. What you do with it is up to you.
+
+Backlogs rot when nobody tends them. Items lose their acceptance criteria, blockers go unrecorded, and the order drifts away from the work until people stop reading it. A backlog you trust is one you follow.
 
 ## Breaking changes
 
+- The plugin is now `backcraft`, and the repository is `gringolito/backcraft`. Run `/plugin uninstall github-backlog-management@gringolito` and `/plugin marketplace remove gringolito`, then follow [Installation](#installation).
 - `.claude/backlog-project.json` is gone. `/setup` writes the Project and label vocabulary to `docs/agents/backlog.md` and links it from `CLAUDE.md` or `AGENTS.md`.
 - Permission modes and the plugin's user configuration are gone. Allow `gh` and `git` in your own Claude Code settings if you want fewer prompts.
 - The SessionStart hook and preflight check are gone.
@@ -36,8 +43,8 @@ Claude enforces structure; it doesn't set your priorities. It flags vague items,
 ## Installation
 
 ```text
-/plugin marketplace add gringolito/github-backlog-management-skill
-/plugin install github-backlog-management@gringolito
+/plugin marketplace add gringolito/backcraft
+/plugin install backcraft@gringolito
 ```
 
 Restart Claude Code if it was already running. If installation fails with an SSH error, see [Troubleshooting](#troubleshooting).
@@ -95,4 +102,4 @@ MIT. See [LICENSE](LICENSE).
 
 Poul-Henning Kamp wrote the Beerware License in the 1990s: *if you think this software is worth it, and we ever meet in person, you can buy me a beer.* It is one of the most honest licenses ever written. Sadly, it isn't OSI-approved, and corporate legal teams can't wave it through, so this project is MIT. Lawyers can sleep soundly.
 
-But the spirit is still here. If this skill saved you an afternoon of backlog wrangling, or simply made your GitHub a little less of a mess, and we ever happen to meet, you can buy me a beer.
+But the spirit is still here. If Backcraft saved you an afternoon of backlog wrangling, or simply made your GitHub a little less of a mess, and we ever happen to meet, you can buy me a beer.

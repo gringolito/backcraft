@@ -1,14 +1,14 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
-  "name": "github-backlog-management",
-  "description": "GitHub-native backlog automation. Manage Issues + Projects v2 with AI-enforced INVEST quality, dependency tracking, and one-command execution.",
+  "name": "backcraft",
+  "description": "Backlog craft on GitHub. Shape Issues into INVEST-ready items, rank them in a Project, track blockers with native dependencies, and pick the next unblocked item.",
   "version": "0.7.1",
   "author": {
     "name": "Filipe Utzig",
     "email": "filipe@gringolito.com"
   },
-  "homepage": "https://github.com/gringolito/github-backlog-management-skill",
-  "repository": "https://github.com/gringolito/github-backlog-management-skill",
+  "homepage": "https://github.com/gringolito/backcraft",
+  "repository": "https://github.com/gringolito/backcraft",
   "license": "MIT",
-  "keywords": ["github", "backlog", "issues", "projects-v2", "milestones", "labels", "invest", "agile", "prioritization"]
+  "keywords": ["backcraft", "github", "backlog", "issues", "projects-v2", "milestones", "labels", "invest", "agile", "prioritization"]
 }
