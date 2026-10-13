@@ -28,7 +28,7 @@ Review changes to skill files under `skills/` against these rules.
 ## Plugin rules
 
 - Skills don't say where the backlog configuration lives or tell the user to run `/setup`. The
-  repo's agent instructions already load `docs/Backlog.md`.
+  repo's agent instructions already load `docs/agents/backlog.md`.
 - Skills don't set the Project's Status field. GitHub sets it as items are added, worked and
   closed.
 - There is no Active Release. A repo usually has one open Milestone; when several are open and the

@@ -12,7 +12,7 @@ Claude enforces structure; it doesn't set your priorities. It flags vague items,
 
 ## Breaking changes
 
-- `.claude/backlog-project.json` is gone. `/setup` writes the Project and label vocabulary to `docs/Backlog.md` and links it from `CLAUDE.md` or `AGENTS.md`.
+- `.claude/backlog-project.json` is gone. `/setup` writes the Project and label vocabulary to `docs/agents/backlog.md` and links it from `CLAUDE.md` or `AGENTS.md`.
 - Permission modes and the plugin's user configuration are gone. Allow `gh` and `git` in your own Claude Code settings if you want fewer prompts.
 - The SessionStart hook and preflight check are gone.
 - Issue Forms templates are gone.
@@ -46,11 +46,11 @@ Your `gh` token needs the `repo`, `project` and `read:user` scopes, plus `read:o
 
 ## Skills
 
-Run `/setup` once per repo. The other skills read `docs/Backlog.md` for the Project and labels.
+Run `/setup` once per repo. The other skills read `docs/agents/backlog.md` for the Project and labels.
 
 | Skill | What it does |
 |---|---|
-| `/setup` | Links a GitHub Project, creates the label vocabulary, and documents both in `docs/Backlog.md`. Safe to re-run. |
+| `/setup` | Links a GitHub Project, creates the label vocabulary, and documents both in `docs/agents/backlog.md`. Safe to re-run. |
 | `/add-item` | Turns a request into one well-formed, ranked backlog item. |
 | `/add-idea` | Parks a rough idea at the bottom of the backlog, with no priority or effort, so it isn't lost. |
 | `/migrate` | Imports an existing `TODO.md`, `BACKLOG.md` or other list into GitHub Issues. |
@@ -67,7 +67,7 @@ Run `/setup` once per repo. The other skills read `docs/Backlog.md` for the Proj
 
 ## Conventions
 
-Every Workable Item carries one `type:*`, one `priority:*` and one `effort:*` label. Priority is severity; execution order is the manual rank in the Project. Items that fail [INVEST](https://en.wikipedia.org/wiki/INVEST_(mnemonic)) get `needs-clarification` until refined. Blockers use GitHub's native dependencies (`blocked_by`). Edit `docs/Backlog.md` to change the label vocabulary.
+Every Workable Item carries one `type:*`, one `priority:*` and one `effort:*` label. Priority is severity; execution order is the manual rank in the Project. Items that fail [INVEST](https://en.wikipedia.org/wiki/INVEST_(mnemonic)) get `needs-clarification` until refined. Blockers use GitHub's native dependencies (`blocked_by`). Edit `docs/agents/backlog.md` to change the label vocabulary.
 
 ## Troubleshooting
 
