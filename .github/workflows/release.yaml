@@ -16,10 +16,10 @@ jobs:
 
       - name: Build release zip
         run: |
-          ZIP_NAME="github-backlog-management-${GITHUB_REF_NAME}.zip"
-          mkdir github-backlog-management
-          cp -r skills/ .claude-plugin/ README.md LICENSE github-backlog-management/
-          zip -r "${ZIP_NAME}" github-backlog-management/
+          ZIP_NAME="backcraft-${GITHUB_REF_NAME}.zip"
+          mkdir backcraft
+          cp -r skills/ .claude-plugin/ README.md LICENSE backcraft/
+          zip -r "${ZIP_NAME}" backcraft/
           echo "ZIP_NAME=${ZIP_NAME}" >> "$GITHUB_ENV"
 
       - name: Upload zip to GitHub Release

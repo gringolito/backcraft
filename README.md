@@ -1,98 +1,126 @@
-# GitHub Backlog Management
+# Backcraft
 
-> A Claude Code plugin that turns GitHub Issues and Projects v2 into a disciplined, AI-assisted backlog. No extra tools, no databases, no webhooks.
+Agent skills for writing a backlog you can build from, right in GitHub Issues and Projects.
+Nothing to host.
 
-## Motivation
+Most of us learned to write code, but not how to write a backlog item. A note like
+"add payment retry logic" is easy to write. Come back to it later, and it leaves too much to guess.
 
-Backlogs rot. Items accumulate without acceptance criteria, blockers go unrecorded, priorities drift from execution order, and eventually the backlog stops reflecting reality, so people stop trusting it.
+A useful item says what we're building, why it matters, who it's for and how we'll know it's done.
+Backcraft helps you work through those questions before handing the item to a teammate or agent.
 
-This skill keeps a GitHub backlog honest. Every item is INVEST-validated before it lands in the queue. Blockers are tracked with GitHub's native dependency API, not buried in comments. `/pick-item` picks the topmost unblocked work automatically, so "what do I do next?" has a deterministic answer.
+## How it works
 
-Claude enforces structure; it doesn't set your priorities. It flags vague items, surfaces dependency candidates for you to confirm, and picks the next item, but you decide what to do with it.
+Everything lives in GitHub. Each item is an issue on a Project board, and buildable work
+carries one label each for type, priority and effort.
+There's no second database to drift out of sync.
 
-## Breaking changes
+`/add-item` and `/refine-item` check items against
+[INVEST](https://en.wikipedia.org/wiki/INVEST_(mnemonic)): independent, negotiable, valuable,
+estimable, small and testable. Items with open questions get `needs-clarification`,
+and `/pick-item` skips them until they're refined.
 
-- `.claude/backlog-project.json` is gone. `/setup` writes the Project and label vocabulary to `docs/agents/backlog.md` and links it from `CLAUDE.md` or `AGENTS.md`.
-- Permission modes and the plugin's user configuration are gone. Allow `gh` and `git` in your own Claude Code settings if you want fewer prompts.
-- The SessionStart hook and preflight check are gone.
-- Issue Forms templates are gone.
-- There is no Active Release. A repo usually has one open Milestone; when several are open, skills ask which one.
-- Removed or merged skills:
+Half-formed ideas are fine too. `/add-idea` parks one at the bottom of the queue
+so you don't lose it.
 
-| Removed | Use instead |
-|---|---|
-| `initialize` | `/setup` |
-| `github-backlog-management` | none; Claude picks skills from their descriptions |
-| `execute-item` | `/pick-item`, then implement as usual |
-| `setup-permissions` | none |
-| `add-external-blocker`, `resolve-external-blocker`, `block-item` | `/external-blocker` |
+Priority and order are separate on purpose. Priority says how badly something matters. Rank is the
+order of work in the Project. `/add-item` proposes where a new item belongs and explains when that
+differs from its priority. It asks before moving existing items.
 
-## Requirements
+Blockers are recorded as GitHub dependencies. `/pick-item` skips items whose blockers
+are still open.
 
-- [Claude Code](https://claude.ai/code)
-- [GitHub CLI](https://cli.github.com/) (`gh`), authenticated
-- A GitHub repository with Issues enabled and an `origin` remote pointing to it
+The agent checks the structure. You make the calls.
 
-## Installation
+## Getting started
 
-```text
-/plugin marketplace add gringolito/github-backlog-management-skill
-/plugin install github-backlog-management@gringolito
+You'll need:
+
+- an agent that loads `SKILL.md` skills, can run `gh`, and can read and edit files in your repo,
+  such as [Claude Code](https://claude.ai/code), [Codex](https://github.com/openai/codex),
+  [pi](https://github.com/earendil-works/pi) or [oh-my-pi](https://github.com/can1357/oh-my-pi)
+- the [GitHub CLI](https://cli.github.com/) (`gh`), signed in
+- a GitHub repo with Issues turned on
+
+### Install
+
+```bash
+npx skills@latest add gringolito/backcraft
 ```
 
-Restart Claude Code if it was already running. If installation fails with an SSH error, see [Troubleshooting](#troubleshooting).
+### Claude Code plugin
 
-Your `gh` token needs the `repo`, `project` and `read:user` scopes, plus `read:org` for organization repos. Add missing ones with `gh auth refresh --scopes repo,project,read:user,read:org`. With a personal access token, create a new one with these scopes.
+If you'd rather use Claude Code's plugin marketplace, install with the commands below.
+Already using `github-backlog-management`? Follow the
+[upgrade steps](#upgrading-from-github-backlog-management) first.
+
+```text
+/plugin marketplace add gringolito/backcraft
+/plugin install backcraft@gringolito
+```
+
+Restart Claude Code if it was already open.
+
+### First run
+
+Run `/setup` once in the repo you want to use Backcraft with. It links a Project,
+creates the labels and writes both to `docs/agents/backlog.md`, which the other skills read.
+Edit that file when you want different labels. Running `/setup` again is safe.
+
+Make sure your agent reads the `CLAUDE.md` or `AGENTS.md` file that `/setup` updates.
+
+Start with `/add-item` to define work, `/add-idea` to save a rough thought, or `/migrate`
+to import an existing backlog.
+
+### Upgrading from github-backlog-management
+
+Backcraft used to be called `github-backlog-management`. Remove the old plugin and
+marketplace, then follow the [Claude Code plugin installation steps](#claude-code-plugin):
+
+```text
+/plugin uninstall github-backlog-management@gringolito
+/plugin marketplace remove gringolito
+```
 
 ## Skills
 
-Run `/setup` once per repo. The other skills read `docs/agents/backlog.md` for the Project and labels.
-
 | Skill | What it does |
 |---|---|
-| `/setup` | Links a GitHub Project, creates the label vocabulary, and documents both in `docs/agents/backlog.md`. Safe to re-run. |
+| `/setup` | Links a GitHub Project, creates the labels and records both in `docs/agents/backlog.md`. |
 | `/add-item` | Turns a request into one well-formed, ranked backlog item. |
-| `/add-idea` | Parks a rough idea at the bottom of the backlog, with no priority or effort, so it isn't lost. |
+| `/add-idea` | Parks a rough idea at the bottom of the backlog, with no priority or effort. |
 | `/migrate` | Imports an existing `TODO.md`, `BACKLOG.md` or other list into GitHub Issues. |
 | `/refine` | Runs a refinement session over items that need clarification or labels. |
-| `/refine-item` | Brings one item up to standard and clears `needs-clarification`, or turns an idea into a defined item. |
-| `/pick-item` | Chooses the next unblocked item by rank, checks it is ready and assigns it to you. |
-| `/spike` | Investigates a spike and delivers a findings pull request with follow-on items. |
-| `/external-blocker` | Records, links and resolves constraints outside the team's control that block items. |
+| `/refine-item` | Clarifies one item and checks it against INVEST, or turns an idea into a defined item. |
+| `/pick-item` | Picks the top unblocked item, checks it's ready and assigns it to you. |
+| `/spike` | Investigates a spike and opens a findings pull request with follow-on items. |
+| `/external-blocker` | Records, links and resolves blockers outside the team's control. |
 | `/plan-release` | Creates a Milestone with a version, due date and scope, or re-plans one. |
-| `/release-status` | Reports how a Release is tracking: progress, blocked items, items needing clarification. |
+| `/release-status` | Shows how a release is going: progress, blocked items, items needing clarification. |
 | `/close-release` | Closes a Milestone and publishes its release. |
-| `/health` | Reports the overall shape of the backlog: distribution, age, overdue priorities, stale work. |
-| `/audit` | Finds conflicting labels, malformed items, broken dependencies and milestone inconsistencies, with a fix for each. |
-
-## Conventions
-
-Every Workable Item carries one `type:*`, one `priority:*` and one `effort:*` label. Priority is severity; execution order is the manual rank in the Project. Items that fail [INVEST](https://en.wikipedia.org/wiki/INVEST_(mnemonic)) get `needs-clarification` until refined. Blockers use GitHub's native dependencies (`blocked_by`). Edit `docs/agents/backlog.md` to change the label vocabulary.
-
-## Troubleshooting
-
-### Plugin install fails with SSH authentication error
-
-Symptom: `git@github.com: Permission denied (publickey).` or `Host key verification failed.` during install.
-
-Claude Code clones marketplace plugins over SSH, even for public repos ([anthropics/claude-code#26588](https://github.com/anthropics/claude-code/issues/26588)). Either rewrite SSH URLs to HTTPS:
-
-```bash
-git config --global url."https://github.com/".insteadOf git@github.com:
-```
-
-or configure SSH for GitHub: trust its host key with `ssh-keyscan -t ed25519 github.com >> ~/.ssh/known_hosts`, and add your key to your GitHub account and `ssh-agent`.
+| `/health` | Shows the shape of the whole backlog: distribution, age, overdue priorities, stale work. |
+| `/audit` | Finds conflicting labels, malformed items, broken dependencies and milestone mix-ups, with a fix for each. |
 
 ## Contributing
 
-Open an Issue for a bug (which skill, what you expected, what happened) or a feature idea (the workflow gap it closes). For a pull request, fork, branch, and change the skill in `skills/<name>/`. Commits follow [Conventional Commits](https://www.conventionalcommits.org/).
+Found a bug or a gap in your workflow? Open an issue. For a bug, say which skill, what you expected
+and what happened. For an idea, describe the gap you hit.
+
+Pull requests are welcome. Fork, branch and edit the skill under `skills/<name>/`, following
+[CODING_STANDARDS.md](CODING_STANDARDS.md). Commits follow
+[Conventional Commits](https://www.conventionalcommits.org/).
 
 ## License
 
 MIT. See [LICENSE](LICENSE).
 
-### On Beer-ware and the spirit that lives on
+### On Beer-ware
 
-Poul-Henning Kamp wrote the Beerware License in the 1990s: *if you think this software is worth it, and we ever meet in person, you can buy me a beer.* It is one of the most honest licenses ever written. Sadly, it isn't OSI-approved, and corporate legal teams can't wave it through, so this project is MIT. Lawyers can sleep soundly.
+Poul-Henning Kamp wrote the Beerware License in the 1990s: *if you think this software is worth it,
+and we ever meet in person, you can buy me a beer.* It's one of the most honest licenses
+ever written.
 
-But the spirit is still here. If this skill saved you an afternoon of backlog wrangling, or simply made your GitHub a little less of a mess, and we ever happen to meet, you can buy me a beer.
+Beerware isn't OSI-approved. Backcraft uses MIT instead to make it easier to adopt at work.
+
+The spirit stays, though. If Backcraft saved you an afternoon of backlog wrangling, or just made
+your GitHub a little less of a mess, and we ever happen to meet, you can buy me a beer.

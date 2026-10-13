@@ -1,6 +1,6 @@
-# Backlog management
+# Backcraft
 
-This plugin manages a software backlog through GitHub-native primitives: Issues, Projects v2, Milestones, Labels. The language below is the shared vocabulary every skill and doc in this repo must speak.
+Backcraft keeps a software backlog in GitHub-native records: Issues, Projects v2, Milestones, Labels. The language below is the shared vocabulary every skill and doc in this repo must speak.
 
 ## Language
 

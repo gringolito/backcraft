@@ -1,6 +1,6 @@
 # Spike 0001: Evaluate replacing `gh` CLI with the official GitHub MCP server
 
-- **Issue:** [#43](https://github.com/gringolito/github-backlog-management-skill/issues/43)
+- **Issue:** [#43](https://github.com/gringolito/backcraft/issues/43)
 - **Labels:** `type:spike` · `priority:P3` · `effort:S`
 - **Milestone:** v0.5.0
 - **Date:** 2026-06-08
