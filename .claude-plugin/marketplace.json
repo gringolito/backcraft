@@ -9,7 +9,7 @@
   "plugins": [
     {
       "name": "backcraft",
-      "description": "Backlog craft on GitHub. Shape Issues into INVEST-ready items, rank them in a Project, track blockers with native dependencies, and pick the next unblocked item.",
+      "description": "Agent skills for writing clear backlog items in GitHub Issues, ordering them in a Project, recording dependencies and picking the next unblocked item.",
       "source": "./",
       "version": "0.7.1",
       "category": "productivity",
