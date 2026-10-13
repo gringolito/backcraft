@@ -16,23 +16,9 @@ The agent enforces the structure and you set the priorities. It flags vague item
 
 Backlogs rot when nobody tends them. Items lose their acceptance criteria, blockers go unrecorded, and the order drifts away from the work until people stop reading it. A backlog you trust is one you follow.
 
-## Breaking changes
+## Upgrading from github-backlog-management
 
-- The plugin is now `backcraft`, and the repository is `gringolito/backcraft`. Run `/plugin uninstall github-backlog-management@gringolito` and `/plugin marketplace remove gringolito`, then follow [Installation](#installation).
-- `.claude/backlog-project.json` is gone. `/setup` writes the Project and label vocabulary to `docs/agents/backlog.md` and links it from `CLAUDE.md` or `AGENTS.md`.
-- Permission modes and the plugin's user configuration are gone. Allow `gh` and `git` in your own Claude Code settings if you want fewer prompts.
-- The SessionStart hook and preflight check are gone.
-- Issue Forms templates are gone.
-- There is no Active Release. A repo usually has one open Milestone; when several are open, skills ask which one.
-- Removed or merged skills:
-
-| Removed | Use instead |
-|---|---|
-| `initialize` | `/setup` |
-| `github-backlog-management` | none; the agent picks skills from their descriptions |
-| `execute-item` | `/pick-item`, then implement as usual |
-| `setup-permissions` | none |
-| `add-external-blocker`, `resolve-external-blocker`, `block-item` | `/external-blocker` |
+The plugin is now `backcraft`, and the repository is `gringolito/backcraft`. Run `/plugin uninstall github-backlog-management@gringolito` and `/plugin marketplace remove gringolito`, then follow [Installation](#installation).
 
 ## Requirements
 
