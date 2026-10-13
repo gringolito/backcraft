@@ -13,3 +13,8 @@ All commits MUST be signed (`-S`) and signed-off (`-s`). Use: `git commit -S -s 
 ### Domain docs
 
 Single-context repo: one `GLOSSARY.md` + `docs/adr/` at the repo root. See `docs/agents/domain.md`.
+
+### Backlog
+
+GitHub Issues tracked in a GitHub Project, managed with the backlog skills. The Project and label vocabulary are in `docs/agents/backlog.md`.
+
