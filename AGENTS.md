@@ -10,14 +10,6 @@ All commits MUST be signed (`-S`) and signed-off (`-s`). Use: `git commit -S -s 
 
 ## Agent skills
 
-### Issue tracker
-
-GitHub Issues, managed via `github-backlog-management-skill`. See `docs/agents/issue-tracker.md`.
-
-### Triage labels
-
-Labels follow `github-backlog-management-skill`'s classification. See `docs/agents/triage-labels.md`.
-
 ### Domain docs
 
 Single-context repo: one `CONTEXT.md` + `docs/adr/` at the repo root. See `docs/agents/domain.md`.
