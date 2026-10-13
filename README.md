@@ -1,6 +1,6 @@
 # Backcraft
 
-> A Claude Code plugin for writing a backlog you can build from, in GitHub Issues and Projects. No extra tools, no databases, no webhooks.
+> Agent skills for writing a backlog you can build from, in GitHub Issues and Projects. No extra tools, no databases, no webhooks.
 
 ## Why
 
@@ -8,11 +8,11 @@ Every developer learns to write code. Few learn to write a backlog item, and it 
 
 Writing backlog items is a craft, and Backcraft is a set of skills for practicing it. A good item says what you're building, why it matters, who it's for and what done looks like, before anyone opens an editor. Think of a sketch next to a blueprint. Hand a blueprint to a teammate or an agent and you get back what you meant.
 
-Backcraft works in GitHub, where your code and issues already are. Every item has to pass [INVEST](https://en.wikipedia.org/wiki/INVEST_(mnemonic)) before it enters the queue, because that is the lowest bar for saying anyone understands it. An item that fails gets `needs-clarification`, and `/pick-item` skips it until `/refine-item` brings it up to standard. Blockers are GitHub dependencies, so blocked work never gets picked.
+Backcraft works in GitHub, where your code and issues already are. Buildable work has to pass [INVEST](https://en.wikipedia.org/wiki/INVEST_(mnemonic)) before anyone picks it up, because that is the lowest bar for saying anyone understands it. An item that fails, or still has open questions, carries `needs-clarification`, and `/pick-item` skips it until `/refine-item` brings it up to standard. Rough ideas don't have to wait for that. `/add-idea` parks one at the bottom of the queue so it isn't lost, and `/refine-item` turns it into a real item when you get to it. Blockers are GitHub dependencies, so blocked work never gets picked.
 
 Order is a decision too. Priority says how much an item matters. Rank, the order in the Project, says what comes next. `/add-item` proposes a Rank and gives its reason when that disagrees with the priority. Nothing gets re-ranked without your OK, so when the order changes, someone chose it.
 
-Claude enforces the structure and you set the priorities. It flags vague items, suggests dependencies for you to confirm and picks the next item. What you do with it is up to you.
+The agent enforces the structure and you set the priorities. It flags vague items, suggests dependencies for you to confirm and picks the next item. What you do with it is up to you.
 
 Backlogs rot when nobody tends them. Items lose their acceptance criteria, blockers go unrecorded, and the order drifts away from the work until people stop reading it. A backlog you trust is one you follow.
 
@@ -29,18 +29,20 @@ Backlogs rot when nobody tends them. Items lose their acceptance criteria, block
 | Removed | Use instead |
 |---|---|
 | `initialize` | `/setup` |
-| `github-backlog-management` | none; Claude picks skills from their descriptions |
+| `github-backlog-management` | none; the agent picks skills from their descriptions |
 | `execute-item` | `/pick-item`, then implement as usual |
 | `setup-permissions` | none |
 | `add-external-blocker`, `resolve-external-blocker`, `block-item` | `/external-blocker` |
 
 ## Requirements
 
-- [Claude Code](https://claude.ai/code)
+- An agent harness that loads `SKILL.md` skills, such as [Claude Code](https://claude.ai/code)
 - [GitHub CLI](https://cli.github.com/) (`gh`), authenticated
 - A GitHub repository with Issues enabled and an `origin` remote pointing to it
 
 ## Installation
+
+In Claude Code, install Backcraft as a plugin:
 
 ```text
 /plugin marketplace add gringolito/backcraft
@@ -48,6 +50,8 @@ Backlogs rot when nobody tends them. Items lose their acceptance criteria, block
 ```
 
 Restart Claude Code if it was already running. If installation fails with an SSH error, see [Troubleshooting](#troubleshooting).
+
+In another harness, copy or symlink the folders under `skills/` into its skills directory.
 
 Your `gh` token needs the `repo`, `project` and `read:user` scopes, plus `read:org` for organization repos. Add missing ones with `gh auth refresh --scopes repo,project,read:user,read:org`. With a personal access token, create a new one with these scopes.
 
