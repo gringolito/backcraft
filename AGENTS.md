@@ -12,4 +12,4 @@ All commits MUST be signed (`-S`) and signed-off (`-s`). Use: `git commit -S -s 
 
 ### Domain docs
 
-Single-context repo: one `CONTEXT.md` + `docs/adr/` at the repo root. See `docs/agents/domain.md`.
+Single-context repo: one `GLOSSARY.md` + `docs/adr/` at the repo root. See `docs/agents/domain.md`.
