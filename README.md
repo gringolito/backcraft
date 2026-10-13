@@ -69,6 +69,9 @@ Edit that file when you want different labels. Running `/setup` again is safe.
 
 Make sure your agent reads the `CLAUDE.md` or `AGENTS.md` file that `/setup` updates.
 
+Start with `/add-item` to define work, `/add-idea` to save a rough thought, or `/migrate`
+to import an existing backlog.
+
 ### Upgrading from github-backlog-management
 
 Backcraft used to be called `github-backlog-management`. Remove the old plugin and
@@ -116,6 +119,8 @@ MIT. See [LICENSE](LICENSE).
 Poul-Henning Kamp wrote the Beerware License in the 1990s: *if you think this software is worth it,
 and we ever meet in person, you can buy me a beer.* It's one of the most honest licenses
 ever written.
+
+Beerware isn't OSI-approved. Backcraft uses MIT instead to make it easier to adopt at work.
 
 The spirit stays, though. If Backcraft saved you an afternoon of backlog wrangling, or just made
 your GitHub a little less of a mess, and we ever happen to meet, you can buy me a beer.
