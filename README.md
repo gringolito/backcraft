@@ -37,7 +37,13 @@ In Claude Code, install Backcraft as a plugin:
 
 Restart Claude Code if it was already running. If installation fails with an SSH error, see [Troubleshooting](#troubleshooting).
 
-In another harness, copy or symlink the folders under `skills/` into its skills directory.
+In another harness, install the skills with the [skills CLI](https://github.com/vercel-labs/skills), which asks which agents to install them for:
+
+```bash
+npx skills@latest add gringolito/backcraft
+```
+
+Or copy or symlink the folders under `skills/` into your harness's skills directory.
 
 Your `gh` token needs the `repo`, `project` and `read:user` scopes, plus `read:org` for organization repos. Add missing ones with `gh auth refresh --scopes repo,project,read:user,read:org`. With a personal access token, create a new one with these scopes.
 
