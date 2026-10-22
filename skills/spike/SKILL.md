@@ -22,9 +22,7 @@ ends, give the recommendation, and list the proposed follow-on items. Keep the f
 tight, concise, technical and direct. The findings live on the issue only; nothing is committed
 to the repository and no pull request is opened.
 
-Show the draft to the user and apply their edits. Post it only after they sign off. The comment
-is not edited afterwards.
-
-Once the findings are posted, create the follow-on items they propose through `add-item`. Each
-one refers back to the spike and links its findings comment, and becomes a sub-issue of the
-spike's parent when it has one. Then close the spike issue as completed.
+Once the findings are posted, ask the user to approve the proposed follow-on items, then create
+the approved ones through `add-item`. Each one refers back to the spike and links its findings
+comment, and becomes a sub-issue of the spike's parent when it has one. Then close the spike
+issue as completed.
