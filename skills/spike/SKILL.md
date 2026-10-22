@@ -10,8 +10,8 @@ findings that answer the spike's question and recommend a path, and backlog item
 the recommendation implies. The done state is the findings posted as a comment on the spike issue,
 the follow-on items created, and the spike issue closed.
 
-Read the spike issue and its comments, and its parent if it has one. Clear up anything unclear
-before investigating.
+Self-assign the spike issue if it has no assignee. Read the spike issue and its comments, and its
+parent if it has one. Clear up anything unclear before investigating.
 
 Prototypes are allowed but only to answer the question, and are thrown away. Findings that say
 "abandon" or "not feasible" are valid outcomes.
