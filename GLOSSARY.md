@@ -156,9 +156,10 @@ blocked items and items that need clarification, and descends into sub-issues. R
 `/pick-item`.
 
 **Spike Execution**:
-The investigate → findings document → follow-on items protocol for a `type:spike` Workable
-Item, run end-to-end through PR by `/spike`. Assumes the item is already selected and
-assigned. Does not repeat Selection.
+The investigate → findings comment → follow-on items protocol for a `type:spike` Workable
+Item, run end-to-end by `/spike`: findings are posted on the spike issue, not committed.
+Assumes the item is already selected and self-assigns it when it has no assignee. Does not
+repeat Selection.
 
 **Migration**:
 The one-time bulk import of an existing `BACKLOG.md` into Issues: normalizes labels, skips

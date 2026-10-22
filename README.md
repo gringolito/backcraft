@@ -93,7 +93,7 @@ marketplace, then follow the [Claude Code plugin installation steps](#claude-cod
 | `/refine` | Runs a refinement session over items that need clarification or labels. |
 | `/refine-item` | Clarifies one item and checks it against INVEST, or turns an idea into a defined item. |
 | `/pick-item` | Picks the top unblocked item, checks it's ready and assigns it to you. |
-| `/spike` | Investigates a spike and opens a findings pull request with follow-on items. |
+| `/spike` | Investigates a spike, posts the findings on its issue and creates follow-on items. |
 | `/external-blocker` | Records, links and resolves blockers outside the team's control. |
 | `/plan-release` | Creates a Milestone with a version, due date and scope, or re-plans one. |
 | `/release-status` | Shows how a release is going: progress, blocked items, items needing clarification. |
