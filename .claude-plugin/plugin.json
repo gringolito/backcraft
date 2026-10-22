@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "backcraft",
   "description": "Agent skills for writing clear backlog items in GitHub Issues, ordering them in a Project, recording dependencies and picking the next unblocked item.",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "author": {
     "name": "Filipe Utzig",
     "email": "filipe@gringolito.com"
