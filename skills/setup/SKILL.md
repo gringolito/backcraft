@@ -22,8 +22,14 @@ unless the user asks otherwise, and link it. Leave the Status field as GitHub cr
 
 The default label vocabulary is in [backlog.md](./backlog.md), which is also the template for the
 repo's file. The user can keep the defaults or map any of them to labels the repo already uses.
-Create only the labels that are missing, with a consistent color per group, and leave existing
-labels, Projects and their settings alone.
+Create only the labels that are missing, and leave existing labels, Projects and their settings
+alone.
+
+Give each label you create a color that tells the reader something. Priority and effort are
+ordered, so each group runs as a gradient along one hue or ramp, `P0` to `P3` and `XS` to `XL`,
+with `P0` the most alarming. Each type gets a color that fits its meaning, such as red for
+`type:bug` and a warning color for `type:security`, and no two type labels in the repo share a
+color. `needs-clarification` gets an attention color that stands out from the other groups.
 
 Write the repo's `docs/agents/backlog.md` from the template, filled in with the Project and the
 labels in use. Then add a `## Backlog` section to `CLAUDE.md` if it exists, otherwise `AGENTS.md`,
