@@ -31,16 +31,16 @@ ask.
 
 Judge the rewritten body against INVEST, with a short reason for each failure. Epics are exempt
 from Small and Testable, which their sub-issues carry. When the item fails, keep
-`needs-clarification` and leave labels, Rank and relationships alone until it passes. When it fails
-Small, suggest splitting it, narrow the original's scope to match, and leave creating the new
+`needs-clarification` and leave labels, position and relationships alone until it passes. When it
+fails Small, suggest splitting it, narrow the original's scope to match, and leave creating the new
 items to `add-item`.
 
 When the item passes, review what surrounds the body. The refined understanding can change the
 type, priority and effort, so check each against the vocabulary and against the item's scope and
 acceptance criteria. Where the right label is unclear, ask the user.
 
-Weigh where the item belongs in the Queue against the items already there, and look for any whose
-Rank or priority now looks wrong next to it.
+Weigh the item's position in the Project against the items already there, and look for any whose
+position or priority now looks wrong next to it.
 
 Check that each existing blocker is still relevant, whether refinement revealed new ones, and
 whether the parent should change or go. Blockers may live in other repos or Projects; flag those

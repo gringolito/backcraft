@@ -1,12 +1,12 @@
 ---
 name: add-item
 description: >-
-  Turn a request into one well-formed, ranked backlog item. Use when the user wants to add, file
-  or capture a new feature, bug, task or spike in the backlog.
+  Turn a request into one well-formed backlog item with a position in the Project. Use when the
+  user wants to add, file or capture a new feature, bug, task or spike in the backlog.
 ---
 
 Create one backlog item from the user's request. When you finish, an issue exists in the Project
-with a clear body, one type, one priority and one effort label, a Rank in the Queue, and the
+with a clear body, one type, one priority and one effort label, a position in the Project, and the
 blockers, blocked items and parent the user named.
 
 When the user only wants to park an idea for later, without defining it now, hand it to
@@ -41,14 +41,14 @@ complexity, never time. Ask when a group can't be decided from the conversation.
 undefined ideas.
 
 A sub-issue inherits nothing from its parent, so set its Milestone, priority, effort, type and
-Rank on their own.
+position on their own.
 
-Execution order comes from Rank, so propose a position in the Queue by comparing the item with the
-open ones, not by defaulting to the bottom. Weigh impact, risk, urgency, how often the gap bites,
-and dependencies: an item goes above what it unblocks and below what it depends on. Priority and
-Rank should agree, with P0 near the top and P3 near the bottom, so say so and give the reason when
-the proposal diverges. If existing items look misranked next to the new one, suggest a move for
-each, and apply it only if the user agrees.
+Execution order comes from the item's position in the Project, so propose one by comparing the
+item with the open ones, not by defaulting to the bottom. Weigh impact, risk, urgency, how often
+the gap bites, and dependencies: an item goes above what it unblocks and below what it depends on.
+Priority and position should agree, with P0 near the top and P3 near the bottom, so say so and give
+the reason when the proposal diverges. If existing items look out of order next to the new one,
+suggest a move for each, and apply it only if the user agrees.
 
 When an open Milestone exists, ask whether the item belongs in it, and which one when several
 are open. Adding to a Milestone changes its scope, so don't add the item to one without the

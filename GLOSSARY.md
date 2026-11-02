@@ -12,7 +12,7 @@ The GitHub Issue. The backing record for every Backlog Item. No separate data st
 
 **Project**:
 The single GitHub Projects v2 board linked to the repo, titled `Backlog`. Holds every Backlog
-Item as a card, carries the Status field and Rank, and is the source of truth for ordering.
+Item as a card, carries the Status field and Position, and is the source of truth for ordering.
 One repo, one Project.
 
 ### Items
@@ -50,7 +50,7 @@ _Avoid_: bucket (the retired name for this concept), category
 
 **Priority**:
 The severity classification of a Workable Item, one of `P0`–`P3`. Answers "how badly does
-this matter?", not "what do we do next?". Independent of Rank.
+this matter?", not "what do we do next?". Independent of Position.
 _Avoid_: importance, urgency
 
 **Effort**:
@@ -78,14 +78,14 @@ The single custom field on the Project, and the lifecycle state of a Backlog Ite
 `Todo`, `In Progress`, `Done`. The only Project-level field. Type, Priority, and Effort live
 as repo labels, not Status.
 
-**Rank**:
-The manual execution order of items in the Project's Todo column. Topmost wins. Answers
-"what do we do next?". The sole input to execution order. `/pick-item` reads
-Rank only and ignores Priority for ordering.
-_Avoid_: position (the GitHub Projects API term), priority (a different concept)
+**Position**:
+The manual execution order of items in the Project's Todo column, as GitHub names it
+(`updateProjectV2ItemPosition`). Topmost wins. Answers "what do we do next?". The sole input to
+execution order. `/pick-item` reads Position only and ignores Priority for ordering.
+_Avoid_: rank (the retired name for this concept), priority (a different concept)
 
 **Queue**:
-The Rank-ordered list of `Todo` items awaiting execution. `/pick-item` pulls from
+The Position-ordered list of `Todo` items awaiting execution. `/pick-item` pulls from
 the top of the Queue.
 _Avoid_: Todo column (acceptable informally, but "Queue" names the ordered intent)
 
@@ -123,7 +123,7 @@ Stub plays. Created, linked and cleared by `/external-blocker`.
 
 **Sub-issue** / **Parent**:
 Hierarchical decomposition recorded via GitHub `sub_issues`. A sub-issue does NOT inherit its
-parent's Release, Priority, Effort, Type, or Rank. The two are independent. A sub-issue has at
+parent's Release, Priority, Effort, Type, or Position. The two are independent. A sub-issue has at
 most one parent.
 _Avoid_: epic (for the parent), task (for the sub-issue) unless independently defined
 
@@ -146,12 +146,12 @@ items, and items without an Effort estimate. The "how is this Release tracking?"
 
 **Refinement**:
 The mutating act of bringing an ambiguous Backlog Item up to standard: discovery dialogue,
-body rewrite, INVEST gate, label/Rank/Dependency fixes, and clearing `needs-clarification`.
+body rewrite, INVEST gate, label/Position/Dependency fixes, and clearing `needs-clarification`.
 Run by `/refine` (session over many items) and `/refine-item` (a single item).
 _Avoid_: grooming
 
 **Selection**:
-Picking and assigning the topmost unblocked Workable Item from the Queue. Obeys Rank, skips
+Picking and assigning the topmost unblocked Workable Item from the Queue. Obeys Position, skips
 blocked items and items that need clarification, and descends into sub-issues. Run by
 `/pick-item`.
 
@@ -169,10 +169,10 @@ _Avoid_: import (acceptable informally. "Migration" is the named activity)
 
 ## Flagged ambiguities
 
-**Priority vs Rank**: these are independent and must never be conflated. Priority is a
-severity _label_ (P0–P3). Rank is the _queue order_ in the Todo column. A P0 can sit below
-a P2 in Rank if that's the deliberate order of work. Skills recommend keeping them roughly
-consistent, but execution obeys Rank alone.
+**Priority vs Position**: these are independent and must never be conflated. Priority is a
+severity _label_ (P0–P3). Position is the _queue order_ in the Todo column. A P0 can sit below
+a P2 in Position if that's the deliberate order of work. Skills recommend keeping them roughly
+consistent, but execution obeys Position alone.
 
 **Dependency vs Sub-issue**: a Dependency _blocks_: a blocked item is skipped in execution
 until its Blocker closes. A Sub-issue relationship _decomposes_: execution descends into a
@@ -192,8 +192,9 @@ tracking?).
 ## Example dialogue
 
 > **Dev:** The P0 is at the bottom of the Todo column. Is that a mistake?
-> **Lead:** No. Priority and Rank are independent. It's a P0 by severity, but it's blocked, so
-> it sits low in Rank. Execution reads Rank, so it won't get picked until we re-rank it.
+> **Lead:** No. Priority and Position are independent. It's a P0 by severity, but it's blocked,
+> so it sits low in Position. Execution reads Position, so it won't get picked until we move it
+> up.
 >
 > **Dev:** Blocked by what? It has a sub-issue open.
 > **Lead:** A sub-issue isn't a Blocker; that's decomposition, not a Dependency. It's blocked

@@ -23,9 +23,9 @@ and `/pick-item` skips them until they're refined.
 Half-formed ideas are fine too. `/add-idea` parks one at the bottom of the queue
 so you don't lose it.
 
-Priority and order are separate on purpose. Priority says how badly something matters. Rank is the
-order of work in the Project. `/add-item` proposes where a new item belongs and explains when that
-differs from its priority. It asks before moving existing items.
+Priority and order are separate on purpose. Priority says how badly something matters. Position
+is the order of work in the Project. `/add-item` proposes where a new item belongs and explains
+when that differs from its priority. It asks before moving existing items.
 
 Blockers are recorded as GitHub dependencies. `/pick-item` skips items whose blockers
 are still open.
@@ -87,7 +87,7 @@ marketplace, then follow the [Claude Code plugin installation steps](#claude-cod
 | Skill | What it does |
 |---|---|
 | `/setup` | Links a GitHub Project, creates the labels and records both in `docs/agents/backlog.md`. |
-| `/add-item` | Turns a request into one well-formed, ranked backlog item. |
+| `/add-item` | Turns a request into one well-formed backlog item with a position in the Project. |
 | `/add-idea` | Parks a rough idea at the bottom of the backlog, with no priority or effort. |
 | `/migrate` | Imports an existing `TODO.md`, `BACKLOG.md` or other list into GitHub Issues. |
 | `/refine` | Runs a refinement session over items that need clarification or labels. |
