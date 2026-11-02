@@ -18,17 +18,17 @@ have to pick yourself, and when you do, offer the options for the user to choose
 two coherent scopes, or a patch versus a minor version. Ask about the due date when you can't
 infer it from a calendar versioning model.
 
-Candidates are the open backlog items with no Milestone, in Project rank order. Leave out
-external blockers and ideas, since they aren't workable. Propose a coherent scope rather than the
-top of the list: favor P0 and P1 items, keep a theme, and size it so the release is deliverable. If
-the user names the issues, use those, after checking that each exists, is open and is neither an
-external blocker nor an idea. For a bug-fix or security release with no list, the unscoped bug and
-security items are the candidates.
+Candidates are the open backlog items with no Milestone, in order of their position in the
+Project. Leave out external blockers and ideas, since they aren't workable. Propose a coherent
+scope rather than the top of the list: favor P0 and P1 items, keep a theme, and size it so the
+release is deliverable. If the user names the issues, use those, after checking that each exists,
+is open and is neither an external blocker nor an idea. For a bug-fix or security release with no
+list, the unscoped bug and security items are the candidates.
 
 Check each candidate's `blocked_by` dependencies. An item whose blockers are all candidates can go
-in only together with them, with the blockers ranked above it. An item with an open blocker outside
-the pool, including an external-blocker stub, stays out and is named in the proposal with the
-blocking reason. The user can override that.
+in only together with them, with the blockers positioned above it. An item with an open blocker
+outside the pool, including an external-blocker stub, stays out and is named in the proposal with
+the blocking reason. The user can override that.
 
 The description gives the release theme, the goals taken from the scoped items' reasons, and any
 dependency chains or constraints that shaped the scope. The user can supply their own. Set the due
