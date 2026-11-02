@@ -28,9 +28,8 @@ alone.
 Give each label you create a color that tells the reader something. Priority and effort are
 ordered, so each group runs as a gradient along one hue or ramp, `P0` to `P3` and `XS` to `XL`,
 with `P0` the most alarming. Each new type label gets a color that fits its meaning, such as red
-for `type:bug` and a warning color for `type:security`, and that no other type label in the repo
-uses. Existing type labels keep their colors even when they already collide. `needs-clarification`
-gets an attention color that stands out from the other groups.
+for `type:bug` and a warning color for `type:security`. `needs-clarification` gets an attention
+color that stands out from the other groups.
 
 Write the repo's `docs/agents/backlog.md` from the template, filled in with the Project and the
 labels in use. Then add a `## Backlog` section to `CLAUDE.md` if it exists, otherwise `AGENTS.md`,
